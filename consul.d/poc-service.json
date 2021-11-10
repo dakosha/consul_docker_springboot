@@ -1,0 +1,20 @@
+{
+  "service": {
+    "name": "poc-service",
+    "tags": [
+      "poc-service"
+    ],
+    "port": 8085,
+    "check": {
+      "id": "api",
+      "name": "HTTP API on port 8085",
+      "http": "http://localhost:8085/actuator/health",
+      "tls_server_name": "",
+      "tls_skip_verify": false,
+      "method": "GET",
+      "header": {"Content-Type": ["application/json"]},
+      "interval": "10s",
+      "timeout": "1s"
+    }
+  }
+}

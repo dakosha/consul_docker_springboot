@@ -1,0 +1,87 @@
+version: "3.9"
+
+services:
+
+  consul-server-1:
+    container_name: server-1
+    image: consul
+    command: agent -server -ui -node=server-1 -bootstrap-expect=1 -client=0.0.0.0
+    networks:
+      - consul
+    ports:
+      - "8500:8500"
+      - "8600:8600/udp"
+
+  consul-client-1:
+    container_name: fox-1
+    image: consul
+    command: agent -node=client-1 -join=consul-server-1 -client=0.0.0.0
+    networks:
+      - consul
+    ports:
+      - "8501:8500"
+      - "8601:8600"
+    depends_on:
+      - "consul-server-1"
+
+  consul-client-2:
+    container_name: fox-2
+    image: consul
+    command: agent -node=client-2 -join=consul-server-1 -client=0.0.0.0
+    networks:
+      - consul
+    ports:
+      - "8502:8500"
+      - "8602:8600"
+    depends_on:
+      - "consul-server-1"
+
+  connector-way4:
+    container_name: connector-way4
+    image: connector-way4
+    command: java -jar connector-way4.jar
+    networks:
+      - consul
+    ports:
+      - "8085:8085"
+    depends_on:
+      - "consul-server-1"
+      - "consul-client-1"
+    environment:
+      - spring.cloud.consul.host=consul-client-1
+      - spring.cloud.consul.discovery.hostname=connector-way4
+
+  connector-way4-1:
+    container_name: connector-way4-1
+    image: connector-way4
+    command: java -jar connector-way4.jar
+    networks:
+      - consul
+    ports:
+      - "8086:8085"
+    depends_on:
+      - "consul-server-1"
+      - "consul-client-1"
+      - "consul-client-2"
+    environment:
+      - spring.cloud.consul.host=consul-client-2
+      - spring.cloud.consul.discovery.hostname=connector-way4-1
+
+  brain:
+    container_name: brain
+    image: brain
+    command: java -jar brain.jar
+    networks:
+      - consul
+    ports:
+      - "8090:8090"
+    depends_on:
+      - "consul-server-1"
+      - "consul-client-1"
+    environment:
+      - spring.cloud.consul.host=consul-client-2
+      - spring.cloud.consul.discovery.hostname=brain
+
+networks:
+  consul:
+    driver: bridge
