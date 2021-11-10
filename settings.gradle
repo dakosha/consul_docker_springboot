@@ -1,3 +1,4 @@
 rootProject.name = 'poc-consul'
 include 'connector-way4'
 include 'brain'
+include 'poc-application'
