@@ -4,12 +4,12 @@ server:
 spring:
   application:
     name: poc-application
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
-      discovery:
-        healthCheckInterval: 5s
-        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-        hostname: localhost
-        port: 8085
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
+#      discovery:
+#        healthCheckInterval: 5s
+#        instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+#        hostname: localhost
+#        port: 8085

@@ -18,10 +18,11 @@ ext {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+    //implementation 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     //implementation 'org.springframework.cloud:spring-cloud-starter-consul-config'
+    testImplementation group: 'junit', name: 'junit', version: '4.13.2'
 }
 
 dependencyManagement {
@@ -31,5 +32,5 @@ dependencyManagement {
 }
 
 test {
-    useJUnitPlatform()
+    useJUnit()
 }
