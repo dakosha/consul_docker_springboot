@@ -1,9 +1,11 @@
 package com.credorax.poc.service;
 
-import org.springframework.boot.SpringApplication;
+import com.credorax.poc.service.filter.SomeFilter;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class Application {
@@ -11,7 +13,7 @@ public class Application {
     public static void main(String[] args) {
         new SpringApplicationBuilder(Application.class)
                 .web(WebApplicationType.SERVLET)
-                        .run(args);
+                .run(args);
     }
 
 }

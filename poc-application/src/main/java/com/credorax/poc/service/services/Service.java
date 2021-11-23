@@ -15,10 +15,10 @@ public class Service {
     private static final Logger LOGGER = LoggerFactory.getLogger(Service.class);
 
     public String verification() {
-        ExecutorService service = Executors.newFixedThreadPool(16);
+        ExecutorService service = Executors.newFixedThreadPool(1);
 
         service.submit(() -> {
-            for (int i=0; i<=50000; i++) {
+            for (int i=0; i<=1; i++) {
                 LOGGER.info("Verification Service was called: " + RND.nextInt());
             }
         });
