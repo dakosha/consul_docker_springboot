@@ -17,7 +17,7 @@ public class SomeFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        if ("GET".equals(req.getMethod())) {
+        if ("GET".equals(req.getMethod()) || "POST".equals(req.getMethod())) {
             LOGGER.info(
                     "Logging Request  {} : {}", req.getMethod(),
                     req.getRequestURI());

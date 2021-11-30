@@ -7,12 +7,12 @@
     </appender>
 
     <appender name="FILE2" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>brain.log</file>
+        <file>logs_directory/brain/brain.log</file>
         <rollingPolicy class="com.credorax.poc.service.logger.MyRollingPolicy">
-            <fileNamePattern>brain-%d{yyyy-MM-dd'T'HH}.%i.log.gz</fileNamePattern>
+            <fileNamePattern>logs_directory/brain/brain-#D%d{yyyy-MM-dd'T'mm}D#.%i.log.gz</fileNamePattern>
             <maxHistory>3</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>50MB</maxFileSize>
+                <maxFileSize>15KB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
 
@@ -20,22 +20,6 @@
             <pattern>%d-{}%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
-
-    <!--appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>test.x.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-            <fileNamePattern>test.%i.log.zip</fileNamePattern>
-            <minIndex>1</minIndex>
-            <maxIndex>5</maxIndex>
-        </rollingPolicy>
-
-        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-            <maxFileSize>5KB</maxFileSize>
-        </triggeringPolicy>
-        <encoder>
-            <pattern>%d-%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
-        </encoder>
-    </appender-->
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

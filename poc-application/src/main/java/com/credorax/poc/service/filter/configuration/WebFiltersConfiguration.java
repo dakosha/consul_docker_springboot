@@ -12,9 +12,9 @@ public class WebFiltersConfiguration {
     public FilterRegistrationBean<SomeFilter> someFilter() {
         FilterRegistrationBean<SomeFilter> bean = new FilterRegistrationBean<>();
         bean.setFilter(new SomeFilter());
-        bean.addUrlPatterns(
-                "/verification",
-                "/api/gets/*");
+//        bean.addUrlPatterns(
+//                "/verification",
+//                "/api/gets/*");
         return bean;
     }
 

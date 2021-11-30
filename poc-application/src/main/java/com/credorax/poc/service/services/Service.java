@@ -4,9 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -15,20 +12,16 @@ public class Service {
     private static final Logger LOGGER = LoggerFactory.getLogger(Service.class);
 
     public String verification() {
-        ExecutorService service = Executors.newFixedThreadPool(1);
-
-        service.submit(() -> {
-            for (int i=0; i<=1; i++) {
-                LOGGER.info("Verification Service was called: " + RND.nextInt());
+        boolean flag = true;
+        while (flag) {
+            if (flag) {
+                LOGGER.info("Some message: " + RND.nextInt(1000));
             }
-        });
 
-        try {
-            service.shutdown();
-            if (service.awaitTermination(1000000000, TimeUnit.MILLISECONDS)) {
-                return "Verification is passed";
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
             }
-        } catch (InterruptedException e) {
         }
         return "Verification is NOT passed";
     }
