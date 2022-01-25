@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.util.Map;
 
 @RestController
 @RequestMapping("math-operations")
@@ -19,6 +20,11 @@ public class MathController {
 
     @Autowired
     private MathService mathService;
+
+    @GetMapping("getDataFromConsulConfig")
+    public Map<String, Object> getDataFromConsulConfig() {
+        return mathService.getDataFromConsulConfig();
+    }
 
     @GetMapping("sum")
     public Integer sum(@RequestParam Integer arg1, @RequestParam Integer arg2) {

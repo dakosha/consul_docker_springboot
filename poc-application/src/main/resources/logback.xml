@@ -7,15 +7,28 @@
     </appender>
 
     <appender name="FILE2" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>logs_directory/brain/brain.log</file>
-        <rollingPolicy class="com.credorax.poc.service.logger.MyRollingPolicy">
-            <fileNamePattern>logs_directory/brain/brain-#D%d{yyyy-MM-dd'T'mm}D#.%i.log.gz</fileNamePattern>
+        <file>apps/brain/logs/brain.log</file>
+        <rollingPolicy class="com.credorax.poc.service.logger.CompressionPostponedTimeBasedRollingPolicy">
+            <fileNamePattern>apps/brain/logs/brain-#D%d{yyyy-MM-dd'T'HH:mm}D#.%i.log.gz</fileNamePattern>
             <maxHistory>3</maxHistory>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>15KB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
+        <encoder>
+            <pattern>%d-{}%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
+    <appender name="FILE3" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>apps/brain/logs/train.log</file>
+        <rollingPolicy class="com.credorax.poc.service.logger.CompressionPostponedTimeBasedRollingPolicy">
+            <fileNamePattern>apps/brain/logs/train-#D%d{yyyy-MM-dd'T'HH:mm}D#.%i.log.gz</fileNamePattern>
+            <maxHistory>3</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>15KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
         <encoder>
             <pattern>%d-{}%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
@@ -23,7 +36,7 @@
 
     <root level="INFO">
         <appender-ref ref="STDOUT"/>
-        <!--appender-ref ref="FILE" /-->
         <appender-ref ref="FILE2" />
+        <appender-ref ref="FILE3" />
     </root>
 </configuration>

@@ -1,6 +1,11 @@
 server:
   port: 8085
-
+com:
+  credorax:
+    hpp:
+      proxy:
+        enabled: true
+        routes: localhost:8185
 spring:
   application:
     name: poc-application
